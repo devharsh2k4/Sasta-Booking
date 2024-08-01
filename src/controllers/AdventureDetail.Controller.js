@@ -25,14 +25,16 @@ async function CreateNewAdventureDetailController(request,response){
 
     const result = await CreateNewAdventureDetailInDBService(adventureId,subtitle,description,modifiedDateSlots)
 
-    if(!result.success){
+    if(result.success){
+        response.status(201).json({
+            success : true,
+            data : result.data
+        })
+    }else{
         throw new Error("CreateNewAdventureDetailController failed to complete task")
     }
 
-    response.status(201).json({
-        success : true,
-        data : result.data
-    })
+  
 }catch(error){
     console.log(error)
     response.status(500).json({
