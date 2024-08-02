@@ -12,7 +12,12 @@ const NODE_ENV = process.env.NODE_ENV
 
 const server = express() 
 
+const {RequestPathAndMethodLoggerMiddleware} = require("./src/middlewares/Logger.middleware")
+
 server.use(express.json())
+
+
+server.use(RequestPathAndMethodLoggerMiddleware)
 
 server.use("/cities", CityRouter);
 
